@@ -58,8 +58,4 @@ print(myStr.replace('o', 'i', 2)) #Heli wirld
 print('Hello world'.split(' ')) #['Hello', 'world']
 print(myStr.split(' ')) #['Helo', 'world']
 
-import re
 
-txt = "bits of paper bits"
-x = re.search("bi", txt)
-print(x)
