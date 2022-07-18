@@ -62,3 +62,5 @@ print(n2) #['ananab']
 
 
 #Q3. Replace all occurrences of 6 with 'six' and 10 with 'ten' for the given string 'They ate 6 apples and 10 banana'.
+txt3 = 'They ate 6 apples and 10 banana'
+print(txt3.replace('6', 'six').replace('10', 'ten')) #They ate six apples and ten banana
