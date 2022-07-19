@@ -109,3 +109,27 @@ m9 = m1.symmetric_difference(m2)
 print(m9)
 
 #symmetric_difference_update()
+
+#set comparison operators
+#<,>,<=,>=,==
+day1 = {"mon", "tue", "wed", "thur"}
+day2 = {"mon", "tue"}
+day3 = {"mon", "tue", "fri"}
+day4 = {"mon", "tue"}
+print (day1>day2) #True
+print (day1<day2) #False
+print (day2==day3) #False , not equivalent set
+print (day2==day4) #True , equal sets
+#(Equal Sets : If all elements are equal in two or more sets, then they are equal.)
+#(Equivalent Sets : If the number of elements is the same in two or more sets, then are equivalent.)
+print (day1<=day2) #False
+print (day1>=day2) #True
+
+#FROZEN SET
+#once it's declared we cannot modify it, immutable
+#using frozenset() method
+FrozenSet = frozenset({"mon", "tue", "wed", "thur"})
+print(FrozenSet) #frozenset({'thur', 'wed', 'tue', 'mon'})
+print(type(FrozenSet)) #<class 'frozenset'>
+#FrozenSet.add("oct") #AttributeError: 'frozenset' object has no attribute 'add'
+#print(FrozenSet) 
