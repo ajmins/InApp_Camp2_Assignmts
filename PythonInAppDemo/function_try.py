@@ -61,3 +61,82 @@ def calculationsYield(a, b):
 #generator runs with for loop for getting all values
 for value in calculationsYield(49,50):
     print(value)
+
+
+#(python function as first class objects
+# rights of a function in python
+# is similar to the rights of a variable)
+
+# [1] asssign fun to a variable
+def myFun1():
+    print("This is myfunc1")
+#assign to a variable
+myFuncVariable = myFun1
+#call both
+myFun1() #call fun directly
+myFuncVariable() #call fun via the variable
+"""
+This is myfunc1
+This is myfunc1
+"""
+# [2] pass fun to a another fun
+def myFunc2(receivedFn):
+    receivedFn()
+myFunc2(myFun1) #passing function as argument
+"""
+This is myfunc1
+"""
+# [3] return a fun from another function
+#return upper() fun of str
+def returnToUpper():
+    return str.upper
+#store reference to returned fun in variable
+toUpperFunRef = returnToUpper()
+#use variable to call the function
+print(toUpperFunRef("Hello world"))
+"""
+HELLO WORLD
+"""
+#[4] define a fun inside another function
+#such fun called as inner fun or nested fun
+def outer():
+    print("outer function")
+
+    def firstInner():
+        print("First Inner Function")
+
+    def secondInner():
+        print("second Inner Function")
+
+    firstInner()
+    secondInner()
+outer()
+"""
+outer function
+First Inner Function
+second Inner Function
+"""
+
+#[5] inner function can access variables in the enclosing function
+# this pattern is known as a Closure
+# child can inherit from parent
+
+def myOuter(myGreeting):
+    print("The outer function says ", myGreeting)
+
+    def myFirstInnerFunc():
+        print("My First Inner Func says", myGreeting)
+    
+    return myFirstInnerFunc
+myOuterFuncVariable = myOuter("Peace to the world")
+myOuterFuncVariable()
+
+"""
+The outer function says  Peace to the world
+My First Inner Func says Peace to the world
+
+"""
+
+#(DECORATIONS---> THESE RIGHTS CAN BE DONE USING TO DECORATIONS)
+
+
