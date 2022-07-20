@@ -77,5 +77,7 @@ print("""Points
         You: {}""".format(computerPlayer,humanPlayer))
 if(computerPlayer>humanPlayer):
     print("Computer Wins!!!!")
-if(computerPlayer<humanPlayer):
+elif(computerPlayer<humanPlayer):
     print("You Wins!!!!")
+else:
+    print("Tie")
