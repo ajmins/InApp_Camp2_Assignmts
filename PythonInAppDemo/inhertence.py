@@ -29,6 +29,21 @@ class MarsRover(Rocket): #inherting from the base class
 #creating object
 x = Rocket("Appollo II","till stratosphere")
 y = MarsRover("Mars Lander","till Mars", "ISRO")
+"""rName = list()
+rDistance = list()
+rMake = list()
+rName[].append()
+for i in range(0,2):
+    rName[i] = input("Enter the rocket name: ")
+    rDistance[i] = input("Enter the distance: ") 
+    rMake[i] = input("Enter the maker name: ")
+
+print(rName)
+print(rDistance)
+print(rMake)
+
+x = Rocket(rName[0], rDistance[0])
+y = MarsRover(rName[1], rDistance[1], rMake[1])   """
 #calling functions
 print(x.launch())
 print(y.launch())
