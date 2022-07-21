@@ -137,6 +137,61 @@ My First Inner Func says Peace to the world
 
 """
 
-#(DECORATIONS---> THESE RIGHTS CAN BE DONE USING TO DECORATIONS)
+#(DECORATIONS ---> THESE RIGHTS CAN BE DONE USING TO DECORATIONS)
+#fun that takes another fun as an argument and extends its behaviour without explicitly modifying it
+#(usages like : logging debugging, authentication, meauring execution time etc
+# for eg: we have a critical fun inside oour python program, we want authenticated users to access them.
+# so we need to check whether a user is authenticated before proceeding with the rest of the code in the function
+# either call a seperate authentication() fun inside our fun or we can use decorators)
+
+#(func = decorator(func)
+# a function which accepts another function, enhance it with a wrapper function and return the enhanced function back)
+
+#define the decorator function, which accepts another function as the argument
+def myDecorator(myFunc):
+    def innerWrapper(): #wrapper function "decorates" the fun received
+        print("Before the Function Call")
+        myFunc()
+        print("After the Function Call")
+
+    return innerWrapper
+
+#(now a function "myFnToPass" is passed into this decorator, so it now points to the wrapper function returned by the decorator)
+def myFntoPass():
+    print("Passing into decorator and printing")
+
+myDecoratorDemo = myDecorator(myFntoPass)
+myDecoratorDemo()
+
+"""
+Before the Function Call
+Passing into decorator and printing
+After the Function Call
+"""
+
+#(to use this decorator by providing syntactic sugar with the @ symbol
+# Syntactic sugar is syntax within a programming language that is desogned to make things easier to read or to express)
+@myDecorator
+def myFnToPass():
+    print("Passing into decorator and printing")
+
+myFnToPass()
+""" these two sentences are not needed for this
+myDecoratorDemo = myDecorator(myFntoPass)
+myDecoratorDemo()
+and when we use the @ we can get only the enhanced version of the original function. 
+"""
+
+
+
+
+
+
+
+
+
+
+
+
 
 
