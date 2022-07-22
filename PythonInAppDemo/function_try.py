@@ -181,15 +181,206 @@ myDecoratorDemo = myDecorator(myFntoPass)
 myDecoratorDemo()
 and when we use the @ we can get only the enhanced version of the original function. 
 """
+print("\n--------------------------------\n")
+#(Keeping name of ecorated fucntion
+# when we decorate a fun its identity is chnaged to the wrapper function
+# we will try to print the docstring from the help function and the correct name from the __name__ attribute)
+@myDecorator
+def mynewFnToPass():
+    """this is a doc string to describe myFnToPass fn""" #docstring
+    print("Passing into decorator and printing")
+mynewFnToPass()
+print(mynewFnToPass.__name__)
+help(mynewFnToPass)
+#Typically when passsing a fn into a decorator, it will print the name and docstring of the wrapper function and not the mynewfntopass fun
+
+#output
+"""Before the Function Call
+Passing into decorator and printing
+After the Function Call
+innerWrapper
+Help on function innerWrapper in module __main__:
+
+innerWrapper()
+"""
+print("\n--------------------------------\n")
+#(to fix this we need to use another decorator called wraps on the arapper function.
+# The wraps decorator is imported from the in-built functools modules.
+# this will define the decorator function, which accepts another fun as the argument)
+
+import functools
+def myDecorator (myFunc):
+    @functools.wraps(myFunc)
+    def innerWrapper(): #wrapper function "decorates" the fun received
+        print("Before the Function Call")
+        myFunc()
+        print("After the Function Call")
+
+    return innerWrapper
+
+@myDecorator
+def mynewFnToPass2():
+    """this is a doc string to describe myFnToPass fn""" #docstring
+    print("Passing into decorator and printing")
+mynewFnToPass2()
+print(mynewFnToPass2.__name__)
+help(mynewFnToPass2)
+
+#output
+"""Before the Function Call
+Passing into decorator and printing
+After the Function Call
+mynewFnToPass2
+Help on function mynewFnToPass in module __main__:
+
+mynewFnToPass2()
+    this is a doc string to describe myFnToPass fn
+"""
+#here shows the reusability of decorator
+
+print("\n--------------------------------\n")
+print("\n--------------------------------\n")
+#to pass arguments into wrapper/decorator
+#but will keep us bounded to using our decorator for functions with only one argument
+
+import functools
+def myDecorator (myFunc):
+    @functools.wraps(myFunc)
+    def innerWrapper(myString): #wrapper function "decorates" the fun received
+        print("Before the Function Call")
+        myFunc(myString)
+        print("After the Function Call")
+
+    return innerWrapper
+
+@myDecorator
+def mynewFnToPass3(myString):
+    """this is a doc string to describe myFnToPass3 fn""" #docstring
+    print("Passing into decorator and printing: " + myString)
+mynewFnToPass3("just some test string")
+print(mynewFnToPass3.__name__)
+help(mynewFnToPass3)
+#output
+"""Before the Function Call
+Passing into decorator and printing: just some test string
+After the Function Call
+mynewFnToPass3
+Help on function mynewFnToPass3 in module __main__:
+
+mynewFnToPass3(myString)
+    this is a doc string to describe myFnToPass3 fn"""
+
+#(here if we use mynewFnToPass3() without any arguments will throw an error becz we have defined the wrap function with a string value in it.)
+print("\n------------###############--------------------\n")
+print("\n-------------##################-------------------\n")
+
+#(passing variable arguments into wrapper/decorator)
+#(*args is used )
+
+import functools
+def myDecorator (myFunc):
+    @functools.wraps(myFunc)
+    def innerWrapper(*args): #here with this no need to change the decorator but we can call this decorator with multiple arguments
+        print("Before the Function Call")
+        myFunc(*args)
+        print("After the Function Call")
+
+    return innerWrapper
+
+@myDecorator
+def mynewFnToPass4(myString1, myString2):
+    """this is a doc string to describe myFnToPass4 fn""" #docstring
+    print("Passing into decorator and printing: " + myString1 + myString2)
+mynewFnToPass4("just some test string" , " next string")
+print(mynewFnToPass4.__name__)
+help(mynewFnToPass4)
+#output
+"""
+Before the Function Call
+Passing into decorator and printing: just some test string next string
+After the Function Call
+mynewFnToPass4
+Help on function mynewFnToPass4 in module __main__:
+
+mynewFnToPass4(myString1, myString2)
+    this is a doc string to describe myFnToPass4 fn
+"""
+print("\n------------###############--------------------\n")
+print("\n-------------##################-------------------\n")
+#(returning values from the decorators
+# we cannot have the return becz wrapper fun here is not returning any value)
+@myDecorator
+def mynewFnToPass5(myString1, myString2):
+    """this is a doc string to describe myFnToPass5 fn""" 
+    returnString = ("new strings : " + myString1 + myString2)
+    return returnString
+
+returnString = mynewFnToPass5("test1", " test2")
+print(returnString)
+
+#output
+"""Before the Function Call
+After the Function Call
+None"""
+
+print("\n------------###############--------------------\n")
+print("\n------------#(To return values from decorators)------------------\n")
+#(To return values from decorators)
+
+def myDecorator (myFunc):
+    @functools.wraps(myFunc)
+    def innerWrapper(*args): #here with this no need to change the decorator but we can call this decorator with multiple arguments
+        print("Before the Function Call")
+        #myFunc(*args) #if we give this function execution here, the fun will execute twice and its not necessary
+            #value = myFunc(*args) #in this also the fun is executing once
+        print("After the Function Call")
+        return myFunc(*args)
+            #return value #here when we assgn the fun to a variable and return that variable
+    return innerWrapper
+
+@myDecorator
+def mynewFnToPass6(myString1, myString2):
+    """this is a doc string to describe myFnToPass6 fn""" 
+    returnString = ("new strings : " + myString1 + myString2)
+    return returnString
+
+returnString = mynewFnToPass6("test1", " test2")
+print(returnString)
+
+#output
+"""
+------------#(To return values from decorators)------------------
+
+Before the Function Call
+After the Function Call
+new strings : test1 test2
+"""
+print("\n------------###############--------------------\n")
+print("\n------------#(passing arguments directly into decorators)------------------\n")
+
+#(passing arguments directly into decorators
+# can pass arguments to a decorator by wrapping them inside of another decorator func)
+def acceptDecorator(myString3): 
+    def myDecorator (myFunc):
+        @functools.wraps(myFunc)
+        def innerWrapper(*args): #here with this no need to change the decorator but we can call this decorator with multiple arguments
+            print("Before the Function Call")
+            #myFunc(*args)
+            print("After the Function Call")
+            return myFunc(*args)
+        return innerWrapper
+    return myDecorator
 
 
+#give new decorator name instead of the decorator
+@acceptDecorator("testing string into new decorator")
+def mynewFnToPass7(myString1, myString2):
+    """this is a doc string to describe myFnToPass7 fn""" 
+    returnString = ("new strings : " + myString1 + myString2)
+    return returnString
 
-
-
-
-
-
-
+returnString = mynewFnToPass7("test1 in ", " test2 in ")
+print(returnString)
 
 
 
