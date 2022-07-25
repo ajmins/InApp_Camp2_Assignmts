@@ -67,7 +67,7 @@ def game():
         else:
             print("Your guess is {} from left and cold from right. Try again".format(condition))
 
-while(True):
+while(1):
     print('1. Play again' if flag else '1. Start the Game')
     print('2. Exit')
     ch = int(input('Enter: '))
