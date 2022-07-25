@@ -1,26 +1,94 @@
 import os
+import re
 #to list all contacts in alphabetical order
 def list():
-    with open('contacts\contacts.txt') as f:
-        myList=sorted(f.readlines())
-        print(f.splitlines()) 
-
-        print(myList) 
-        f.close()
-
+    lst=[]
+    newLst=[]
+    try:
+        with open('contacts\contacts.txt', 'r') as f:
+            for line in f:
+                lst.append(line)
+            for i in lst:
+                if i != 'Name - Phone Number\n':
+                    newLst.append(i.strip())
+            newLst.sort()
+            for i in newLst:
+                print(i)
+    except:
+        print("Oops! something error")
 #to add a new contact
 def add():
     name = input("Enter the name of new contact: ")
     num = input("Enter the phone number: ")
-    f = open("contacts\contacts.txt", "a")
-    f.write(name + "-" + num)
-    f.write("\n")
-    f.close()
-    print("Updated PhoneBook is: ")
+    try:
+        f = open("contacts\contacts.txt", "a")
+        phoneBook = name + " - " + num
+        f.write(phoneBook)
+        f.write("\n")
+        f.close()
+        print("Added Successfully")
+    except:
+        print("Oops! something error")
+    print("\nUpdated PhoneBook is: ")
     list()
 
-def accept():
-        #choice selection
+#to remove a contact
+def delete():
+    flag = 0
+    name = input("Enter the name of contact to delete: ")
+    try:
+        with open("contacts\contacts.txt", "r") as fr:
+            lines = fr.readlines()
+    
+            with open('contacts\contacts.txt', 'w') as fw:
+                for line in lines:
+                    if line.find(name) == -1:
+                        fw.write(line)
+                    
+            #print("Deleted successfully")
+    except:
+        print("Oops! something error")
+    print("\nUpdated PhoneBook is: ")
+    list()
+
+#to search a contact by name
+def searchName():
+    name = input("Enter the name of contact to search: ")
+    try:
+        with open("contacts\contacts.txt", "r") as fr:
+            # read all lines in a list
+            lines = fr.readlines()
+    
+            with open('contacts\contacts.txt', 'r') as fw:
+                # check if string present on a current line
+                for line in lines:
+                    if line.find(name) != -1:
+                        print('Name - Phone Number\n Contact: ', line)
+                        #print(type(line))
+        #print("Found successfully")
+    except:
+        print("Oops! something error")
+        
+#to search a contact by number
+def searchNo():
+    num = (input("Enter the phone number to search: "))
+    try:
+        with open("contacts\contacts.txt", "r") as fr:
+            # read all lines in a list
+            lines = fr.readlines()
+    
+            with open('contacts\contacts.txt', 'r') as fw:
+                # check if string present on a current line
+                for line in lines:
+                    if line.find(num) != -1:
+                        print('Name - Phone Number\n Contact: ', line)
+                        #print(type(line))
+        #print("Found successfully")
+    except:
+        print("Oops! something error")
+
+#choice selection
+def accept():   
     while(True):
         ch =int(input("""
 
@@ -54,7 +122,7 @@ def accept():
         else:
             print("Invalid Input. Try Again!")
 
-print(os.getcwd())
+#print(os.getcwd())
 #main program
 if os.path.isdir("contacts") == True:
     if os.path.exists("contacts\contacts.txt"):
@@ -63,6 +131,5 @@ if os.path.isdir("contacts") == True:
         myFilePtr = open("contacts\contacts.txt","w")
         with open("contacts\contacts.txt", "a") as f:
             f.write("Name - Phone Number\n")
-            f.close()
 else:
     os.mkdir("contacts")
