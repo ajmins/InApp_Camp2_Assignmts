@@ -15,14 +15,14 @@
 
 class Student:
 	# Constructor
-	def __init__(self, name, rollno, m1, m2, m3, m4, m5):
-		self.name = name
-		self.rollno = rollno
-		self.m1 = m1
-		self.m2 = m2
-		self.m3 = m3
-		self.m4 = m4
-		self.m5 = m5		
+	def __init__(self, Name, Rollno, MatMark, PhyMark, ChemMark, EngMark, PrgrmMark):
+		self.Name = Name
+		self.Rollno = Rollno
+		self.MatMark = MatMark
+		self.PhyMark = PhyMark
+		self.ChemMark = ChemMark
+		self.EngMark = EngMark
+		self.PrgrmMark = PrgrmMark		
 	# Function to create and append new student
 	def accept(self, Name, Rollno, MatMark, PhyMark, ChemMark, EngMark, PrgrmMark ):
 		# use ' int(input()) ' method to take input from user
@@ -31,13 +31,13 @@ class Student:
 
 	# Function to display student details	
 	def display(self, obj):
-		print("Name :{}".format(obj.name))
-		print("RollNo : ", obj.rollno)
-		print("MatMark : ", obj.m1)
-		print("PhyMark : ", obj.m2)
-		print("ChemMark : ", obj.m3)
-		print("EngMark : ", obj.m4)
-		print("PrgrmMark : ", obj.m5)
+		print("Name :{}".format(obj.Name))
+		print("RollNo : ", obj.Rollno)
+		print("MatMark : ", obj.MatMark)
+		print("PhyMark : ", obj.PhyMark)
+		print("ChemMark : ", obj.ChemMark)
+		print("EngMark : ", obj.EngMark)
+		print("PrgrmMark : ", obj.PrgrmMark)
 		print("\n")	
 		
 	# Search Function	
@@ -56,53 +56,50 @@ class Student:
 		i = obj.search(rn)
 		roll = No
 		ls[i].rollno = roll
-		
+obj = Student(a, b, c, d, e, f, g)			
+while(1):
+	print("\nOperations used.. ")
+	print("\n1.Create Student details\n2.Display Student Details\n""3.Search Details of a Student\n4.Delete Details of Student""\n5.Update Student Details\n6.Exit")
+	ch = int(input("Enter choice:"))
+	# an object of Student class
 
-print("\nOperations used.. ")
-print("\n1.Create Student details\n2.Display Student Details\n""3.Search Details of a Student\n4.Delete Details of Student""\n5.Update Student Details\n6.Exit")
-ch = int(input("Enter choice:"))
+	# Create a list to add Students
+	ls =[]
+	if(ch == 1):
+		obj.accept(obj.Name, obj.Rollno, obj.MatMark, obj.PhyMark, obj.ChemMark, obj.EngMark, obj.PrgrmMark)
+		a = (input("Enter name: "))
+		b = int(input("Enter the roll number: "))
+		c = int(input("Enter the maths mark: "))
+		d = int(input("Enter the physics mark: "))
+		e = int(input("Enter the chemistry mark: "))
+		f = int(input("Enter the english mark: "))
+		g = int(input("Enter the programing mark: "))
 
-# Create a list to add Students
-ls =[]
-# an object of Student class
-a = (input("Enter name: "))
-b = int(input("Enter the roll number: "))
-c = int(input("Enter the maths mark: "))
-d = int(input("Enter the physics mark: "))
-e = int(input("Enter the chemistry mark: "))
-f = int(input("Enter the english mark: "))
-g = int(input("Enter the programing mark: "))
-obj = Student(a, b, c, d, e, f, g)
-
-
-if(ch == 1):
-	obj.accept(obj.Name, obj.Rollno, obj.MatMark, obj.PhyMark, obj.ChemMark, obj.EngMark, obj.PrgrmMark)
-		
-elif(ch == 2):
-	print("\n")
-	print("\nList of Students\n")
-	for i in range(ls.__len__()):	
-		obj.display(ls[i])
+	elif(ch == 2):
+		print("\n")
+		print("\nList of Students\n")
+		for i in range(ls.__len__()):	
+			obj.display(ls[i])
+				
+	elif(ch == 3):
+		print("\n Student Found, ")
+		s = obj.search(2)
+		obj.display(ls[s])
+				
+	elif(ch == 4):
+		obj.delete(2)
+		print(ls.__len__())
+		print("List after deletion")
+		for i in range(ls.__len__()):	
+			obj.display(ls[i])
+				
+	elif(ch == 5):
+		obj.update(3, 2)
+		print(ls.__len__())
+		print("List after updation")
+		for i in range(ls.__len__()):	
+			obj.display(ls[i])
+				
+	else:
+		print("Invalid Input")
 			
-elif(ch == 3):
-	print("\n Student Found, ")
-	s = obj.search(2)
-	obj.display(ls[s])
-			
-elif(ch == 4):
-	obj.delete(2)
-	print(ls.__len__())
-	print("List after deletion")
-	for i in range(ls.__len__()):	
-		obj.display(ls[i])
-			
-elif(ch == 5):
-	obj.update(3, 2)
-	print(ls.__len__())
-	print("List after updation")
-	for i in range(ls.__len__()):	
-		obj.display(ls[i])
-			
-else:
-	print("Invalid Input")
-		
