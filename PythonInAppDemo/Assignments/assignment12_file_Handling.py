@@ -1,5 +1,4 @@
 import os
-import re
 #to list all contacts in alphabetical order
 def list():
     lst=[]
