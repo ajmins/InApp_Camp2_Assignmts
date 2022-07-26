@@ -42,10 +42,12 @@ def delete():
     
             with open('contacts\contacts.txt', 'w') as fw:
                 for line in lines:
-                    if line.find(name) == -1:
-                        fw.write(line)
+                    nam, phone = line.strip().split('-')
+                    if nam.strip() == name:
+                        print("Deleted successfully")
+                        continue
+                    fw.write(line)
                     
-            #print("Deleted successfully")
     except:
         print("Oops! something error")
     print("\nUpdated PhoneBook is: ")
@@ -54,36 +56,36 @@ def delete():
 #to search a contact by name
 def searchName():
     name = input("Enter the name of contact to search: ")
+    f = False
     try:
         with open("contacts\contacts.txt", "r") as fr:
-            # read all lines in a list
             lines = fr.readlines()
-    
-            with open('contacts\contacts.txt', 'r') as fw:
-                # check if string present on a current line
-                for line in lines:
-                    if line.find(name) != -1:
-                        print('Name - Phone Number\n Contact: ', line)
-                        #print(type(line))
-        #print("Found successfully")
+            for line in lines:
+                nam, phone = line.strip().split('-')
+                if nam.strip() == name:
+                    print('Name - Phone Number\n', line)
+                    print("Found successfully")
+                    f = True
+        if not f:
+            print("Not Found")
     except:
         print("Oops! something error")
         
 #to search a contact by number
 def searchNo():
+    f = False
     num = (input("Enter the phone number to search: "))
     try:
         with open("contacts\contacts.txt", "r") as fr:
-            # read all lines in a list
             lines = fr.readlines()
-    
-            with open('contacts\contacts.txt', 'r') as fw:
-                # check if string present on a current line
-                for line in lines:
-                    if line.find(num) != -1:
-                        print('Name - Phone Number\n Contact: ', line)
-                        #print(type(line))
-        #print("Found successfully")
+            for line in lines:
+                nam, phone = line.strip().split('-')
+                if phone.strip() == num:
+                    print('Name - Phone Number\n', line)
+                    print("Found successfully")
+                    f = True
+        if not f:
+            print("Not Found")
     except:
         print("Oops! something error")
 
