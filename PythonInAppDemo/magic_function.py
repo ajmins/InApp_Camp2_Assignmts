@@ -12,6 +12,9 @@
 
 #to view the available dunder methods in a object, dir() is used
 #eg: int is an object and to view its dunder methods
+from re import S
+
+
 print(dir(int))
 #output
 """
@@ -103,16 +106,23 @@ class softwares:
     names = []
     versions = []
 
-    def __init__(self, names):
-        if names:
-            self.names = names.copy()
-            for name in names:
+    #defining(overriding) the constructor
+    def __init__(self, names): #getting sw names as a list
+        if names: #if names is not empty
+            self.names = names.copy() #create a copy of the list
+            for name in names: #looping through list
                 self.versions[name] = 1
+                #initialize sw version to 1 for all softwares
         else:
-
-
-
-
+            raise Exception("names cannot be empty")
+    #overriding the str dunder for displaying the list of softwares
+    def __str__(self):
+        #loop through the dictionary and print the list
+        s = "The list of softwares and its versions are :\n"
+        for key, value in self.versions.items():
+            s += f"{key}:{value}\n"
+        return s
+    
 
 
 
