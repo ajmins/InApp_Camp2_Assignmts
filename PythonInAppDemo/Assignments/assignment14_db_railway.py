@@ -91,7 +91,7 @@ def showWLDetails(myCursor):
     for passenger_id, name, stations, train_name in passengers:
         print(f'{passenger_id} \t {name}\t  {stations}  \t{train_name}')
 
-def bookorAddtoWL():
+def booking():
     Station = listStops()
     print('\nPlease enter your destinations listed below')
     for stationcode, stationname in Station:
@@ -121,7 +121,7 @@ while(1):
             station = listStops()
             print(station)
         case 2:
-            bookorAddtoWL()
+            booking()
         case 3:
             showPassengerDetails()
         case 4:
