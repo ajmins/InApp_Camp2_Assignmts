@@ -1,8 +1,5 @@
 #Python Lists and List Access Options
 
-from xml.dom.pulldom import START_DOCUMENT
-
-
 studAge = [18, 21, 23, 20, 21]
 #non-destructive nature
 print(studAge) #[18, 21, 23, 20, 21]
@@ -58,6 +55,58 @@ print(newstudName + newstudName) #['aju', 'diya', 'hina', 'leya', 'aju', 'diya',
 
 #list dupliaction/multiplication using * operator
 print(newstudName*3) #['aju', 'diya', 'hina', 'leya', 'aju', 'diya', 'hina', 'leya', 'aju', 'diya', 'hina', 'leya']  
+
+
+
+#Python list comprehension: offers a shorter syntax or else we need a for loop
+
+#create a copy of list with some processing/ condition checks without implementing the list comprehension
+words = ['hello', 'world', 'how', 'are', 'you']
+newlist = [] #all the words contain 'o'
+
+for word in words:
+    if 'o' in word:
+        newlist.append(word)
+
+print(newlist)
+
+#list comprehension
+#syntax :- [expression for item in iterable if condition == True]; 
+#condition- optional, iterable like list, tuple or set
+
+newlst = [word for word in words if 'o' in word]
+print(newlst)
+
+#iterables in python list comprehension
+# without condition
+numList = [x for x in range(20)]
+print(numList)
+
+#with condition
+numList2 = [x for x in range(20) if x < 15]
+print(numList2)
+
+#Expressions
+words = ['hello', 'world', 'how', 'are', 'you']
+newlst2 = [word.upper() for word in words if 'o' in word]
+print(newlst2)
+
+# hello for all the items in a list
+newlst3 = ['hello' for word in words]
+print(newlst3)
+
+#get rid of an item 
+newlst4 = [word if word != 'hello' else 'hi' for word in words]
+print(newlst4)
+
+
+
+
+
+
+
+
+
 
 
 

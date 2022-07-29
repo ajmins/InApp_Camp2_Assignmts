@@ -40,7 +40,14 @@ def listStops(myCursor):
     stations = myCursor.fetchall()
     return stations
 
-#to book a ticket
+#to list all the trains
+@connectdb
+def listTrains(myCursor):
+    myCursor.execute('SELECT * FROM trains')
+    trainList = myCursor.fetchall()
+    return trainList
+
+#to book tickets
 @connectdb
 def ticketBook(myCursor, stationID, name ):
     myCursor.execute('SELECT * FROM trains WHERE stop_id >= ?', (stationID))
@@ -55,6 +62,7 @@ def ticketBook(myCursor, stationID, name ):
             return bookStatus
     return bookStatus
 
+#adding to wait list
 @connectdb 
 def addtoWaitingList(myCursor, stationID, name):
     myCursor.execute('SELECT * FROM trains WHERE end_id >= ?',(stationID))
@@ -69,6 +77,7 @@ def addtoWaitingList(myCursor, stationID, name):
             return addtoWLStatus
     return addtoWLStatus
 
+#displyaing booked passengers list
 @connectdb
 def showPassengerDetails(myCursor):
     myCursor.execute('''SELECT passenger_id, passenger_name, station_name, train_name  FROM passengers 
@@ -80,6 +89,7 @@ def showPassengerDetails(myCursor):
     for passenger_id, name, stations, train_name in passengers:
         print(f'{passenger_id}  {name}  {stations}  {train_name}')
 
+#displyaing booked passengers in the wait-list
 @connectdb
 def showWLDetails(myCursor):
     myCursor.execute('''SELECT passenger_id, passenger_name, station_name, train_name  FROM waitlist 
@@ -91,6 +101,7 @@ def showWLDetails(myCursor):
     for passenger_id, name, stations, train_name in passengers:
         print(f'{passenger_id} \t {name}\t  {stations}  \t{train_name}')
 
+#getting inputs from user
 def booking():
     Station = listStops()
     print('\nPlease enter your destinations listed below')
@@ -111,22 +122,30 @@ def booking():
 while(1):
     ch = Utils.getNum("""
     1. View all stations
-    2. Ticket Booking
-    3. View details of passengers
-    4. Show waiting list
-    5. Exit
+    2. View all trains
+    3. Ticket Booking
+    4. View details of passengers
+    5. Show waiting list
+    6. Exit
     """)
     match(ch):
         case 1: 
-            station = listStops()
-            print(station)
-        case 2:
-            booking()
+            stationList = listStops()
+            print("StationID - StationName")
+            for stationID,stationName in stationList:
+                print(stationID,'-', stationName)    
+        case 2: 
+            trainList = listTrains()
+            print("TrainID - TrainName - Starting - Destination ")
+            for trainID, trainName, starting, destination,_,_,_ in trainList:
+                print(trainID,'-', trainName,'-', starting,'-', destination)      
         case 3:
-            showPassengerDetails()
+            booking()
         case 4:
-            showWLDetails()
+            showPassengerDetails()
         case 5:
+            showWLDetails()
+        case 6:
             exit()
         case _:
             print('Invalid input')
