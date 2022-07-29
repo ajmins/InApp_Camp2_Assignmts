@@ -3,8 +3,6 @@ import functools
 
 conString = 'Driver={SQL Server};Server=DESKTOP-CJEOG7N\SQLEXPRESS;Database=Camp2;Trusted_Connection=yes;'
 
-MAXberth = 5
-MAXwait = 2
 class Utils:
     def getNum(*msg):
         while(1):
@@ -54,7 +52,7 @@ def ticketBook(myCursor, stationID, name ):
     trains = myCursor.fetchall()
     bookStatus = False
     for trainID,trainName,_,_,_,berthFill,_ in trains:
-        if berthFill < MAXberth:
+        if berthFill < 5: #5 is the maximum berths available
             myCursor.execute('INSERT INTO passengers(passenger_name,station_id,train_id) VALUES (?,?,?);',(name,stationID,trainID)) 
             myCursor.execute('UPDATE trains SET berth_fill = ? WHERE train_id = ?',(berthFill+1, trainID))
             bookStatus = True
@@ -69,7 +67,7 @@ def addtoWaitingList(myCursor, stationID, name):
     trains = myCursor.fetchall()
     addtoWLStatus = False
     for trainId,trainName,_,_,waitingListFill in trains:
-        if waitingListFill < MAXwait:
+        if waitingListFill < 2: #2 is the maximum waiting list berths available
             myCursor.execute('INSERT INTO waitlist(passenger_name,stop_id,train_id) VALUES (?,?,?);',(name,stationID,trainId))
             myCursor.execute('UPDATE trains SET wait_list_filled = ? WHERE train_id = ?',(waitingListFill+1,trainId))
             addtoWLStatus = True
