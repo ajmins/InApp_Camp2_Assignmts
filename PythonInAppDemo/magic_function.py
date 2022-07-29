@@ -104,9 +104,11 @@ print(rand_obj_a + rand_obj_b)
 #dictionary of softwares name and version as key value pair
 class softwares:
     names = []
-    versions = []
+    versions = {}
 
     #defining(overriding) the constructor
+    #invoked when we create an object and give the names list
+    #sw1 = Softwares(['ps','msword','mspaint'])
     def __init__(self, names): #getting sw names as a list
         if names: #if names is not empty
             self.names = names.copy() #create a copy of the list
@@ -115,17 +117,81 @@ class softwares:
                 #initialize sw version to 1 for all softwares
         else:
             raise Exception("names cannot be empty")
+    
     #overriding the str dunder for displaying the list of softwares
+    #will be invoked when calling print(objname)
+    #sw1 = Softwares(['ps','msword','mspaint'])
+    #print(sw1)
     def __str__(self):
         #loop through the dictionary and print the list
         s = "The list of softwares and its versions are :\n"
         for key, value in self.versions.items():
-            s += f"{key}:{value}\n"
+            s += f"{key}: version : {value} \n"
         return s
-    
+
+    #overriding the __setitem__ dunder method
+    #will invoked when for example, p['msword']=2
+    def __setitem__(self, name, version):
+        if name in self.versions:
+            self.versions[name] = version
+        else:
+            raise Exception("Software name doesn't exist")
+
+    #overriding the __getitem__ dunder method
+    #will be invoked when
+    #print(sw1['msword'])
+    def __getitem__(self,name):
+        if name in self.versions:
+            return self.versions[name]
+        else:
+            raise Exception("Software name doesn't exist")
+
+    #(overriding the __delitem__ dunder method
+    #will be invoked when
+    # del sw1['msword])
+    def __delitem__(self,name):
+        if name in self.versions:
+            #delete that item from the dictioary versions
+            del self.versions[name]
+            #delete the item from the names list
+            self.names.remove(name) 
+        else:
+            raise Exception("Software name doesn't exist")
+
+    #(overriding __len__ dunder method
+    # will be invokde when calling print (len(sw1))
+    # )
+    def __len__(self):
+        return len(self.names)
+
+    #(override __contains__ dunder method
+    # will be invoked when calling 
+    # if 'msword in sw1: if yes, wil return true, else false)
+    def __contains__(self, name):
+        if name in self.versions:
+            return True
+        else:
+            False
 
 
+#creating the Software calss object
+sw1 = softwares(['ps','msword','mspaint'])   
+#print the softaware calss object
+print(sw1)
+#trying to set a new version for ms word
+sw1['msword'] = 2
+print(sw1)
 
+#trying to get a  version number for ms word
+print(sw1['msword'])
+#delete item from dictioary
+del sw1['msword']
+print(sw1)
+#print the length
+print(len(sw1))
 
-
-
+#checking if the given name in dictioanry
+if 'msword' in sw1:
+    print("Software Exists")
+else:
+    print("Software doesn't Exists")
