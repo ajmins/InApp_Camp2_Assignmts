@@ -1,0 +1,7 @@
+
+PS D:\InApp\Camp2> python -m venv homevirtualenv
+PS D:\InApp\Camp2> cd .\homevirtualenv\
+PS D:\InApp\Camp2\homevirtualenv> cd .\Scripts\
+PS D:\InApp\Camp2\homevirtualenv\Scripts> .\activate.bat --> wrong
+PS D:\InApp\Camp2\homevirtualenv\Scripts> .\activate
+(homevirtualenv) PS D:\InApp\Camp2\homevirtualenv\Scripts>
