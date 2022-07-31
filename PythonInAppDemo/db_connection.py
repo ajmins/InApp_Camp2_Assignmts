@@ -1,5 +1,5 @@
 #importing pyodbc module
-import pyodbc
+import pyodbc as pd
 #ODBC connection, but now it's not using, nowadays using ORM
 """
 Set-ExecutionPolicy -Scope CurrentUser 
@@ -7,11 +7,11 @@ Set-ExecutionPolicy -Scope CurrentUser
 """
 #create a connection string
 #conString = 'Driver={SQL Server};Server=DESKTOP-CJEOG7N\SQLEXPRESS;Database=employee_db1;Trusted_Connection=yes;'
-conString2 = 'Drive={SQL Server Native Client 11.0};Server=LAPTOP-R5LS4JCT\SQLEXPRESS;Database=employee_db1;Trusted_Connection=yes;'
+conString2 = 'Drive={ODBC Driver 17 for SQL Server};Server=LAPTOP-R5LS4JCT\SQLEXPRESS;Database=employee_db1;Trusted_Connection=yes;'
 
 #create a connection with the connection string
 #myConn = pyodbc.connect(conString)
-myConn2 = pyodbc.connect(conString2)
+myConn2 = pd.connect(conString2)
 
 #get the cursor object
 #myCursor = myConn.cursor()
