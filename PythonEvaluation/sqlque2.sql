@@ -1,0 +1,14 @@
+USE Camp2
+
+CREATE TABLE patient(
+	patientId INT NOT NULL IDENTITY PRIMARY KEY,
+	patientName VARCHAR(50) NOT NULL,
+	gender VARCHAR(20) NOT NULL,
+	age INT NOT NULL,
+	bloodGroup VARCHAR(10) NOT NULL
+);
+
+SELECT * FROM patient
+
+
+--DROP TABLE patient
