@@ -7,8 +7,6 @@
 # create inherited class 'OP' and 'NonOP' should have the additional Admit function and 'NonOp' a function to generate an OP Ticket with incrementing no for every patient)
 
 #patient class
-from sys import flags
-
 
 class Patient:
     def __init__(self, patientID, name, gender, age, dob, bloodGroup):
